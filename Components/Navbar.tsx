@@ -1,90 +1,103 @@
 "use client";
 
-import React, { useState } from "react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faHome,
+  faUser,
+  faProjectDiagram,
+  faEnvelope,
+  faBars,
+  faTimes,
+  faTools,
+} from '@fortawesome/free-solid-svg-icons';
 import Link from "next/link";
 
-interface NavLinkType {
-  title: string;
-  path: string;
-}
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-const navLinks: NavLinkType[] = [
-  {
-    title: "Home",
-    path: "#home", 
-  },
-  {
-    title: "About",
-    path: "#about",
-  },
-  {
-    title: "Projects",
-    path: "#projects",
-  },
-    {
-    title: "Skills",
-    path: "#skills",
-  },
-  {
-    title: "Contact",
-    path: "#contact", 
-  },
-];
-
-const Navbar: React.FC = () => {
-  const [navbarOpen, setNavbarOpen] = useState<boolean>(false);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#121212] w-full">
-      <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-4 py-2">
-        <Link
-          href="#portfolio" 
-          className="text-2xl md:text-5xl text-white font-semibold ml-[10px]"
-        >
-          Portfolio
-        </Link>
-        <div className="mobile-menu block md:hidden">
-          <button
-            onClick={() => setNavbarOpen(!navbarOpen)}
-            className="flex items-center px-3 py-2 border rounded-md border-slate-200 text-slate-200 hover:text-white hover:border-white transition-all duration-300"
-          >
-            {navbarOpen ? (
-              <XMarkIcon className="h-6 w-6" />
-            ) : (
-              <Bars3Icon className="h-6 w-6" />
-            )}
-          </button>
-        </div>
-        <div className="menu hidden md:block md:w-auto">
-          <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0">
-            {navLinks.map((link, index) => (
-              <li key={index}>
-                <Link
-                  href={link.path}
-                  className="text-xl font-medium text-white hover:text-purple-600 hover:underline transition-all duration-300"
-                >
-                  {link.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={`mobile-menu-links ${navbarOpen ? "block" : "hidden"} md:hidden`}>
-          <ul className="flex flex-col p-4 space-y-4 mt-4 bg-[#121212]">
-            {navLinks.map((link, index) => (
-              <li key={index}>
-                <Link
-                  href={link.path}
-                  className="text-xl font-medium text-white hover:text-purple-600 hover:underline transition-all duration-300"
-                >
-                  {link.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <nav className="bg-black text-pink-300 px-3 py-2 sm:px-4 sm:py-3 lg:px-6 lg:py-4 fixed top-0 left-0 w-full z-50">
+      {/* Desktop Navbar */}
+      <div className="hidden lg:flex justify-between items-center">
+        {/* Brand */}
+        <h1 className="text-xl lg:text-2xl font-bold ml-4">SYEDA</h1>
+
+        {/* Menu Links */}
+        <ul className="flex space-x-8 mr-8 mt-2">
+          <li className="relative group">
+            <Link href="/" className="text-lg">Home</Link>
+            <div className="absolute bottom-[-1.5rem] left-1/2 transform -translate-x-1/2 w-8 h-8 bg-red-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
+              <FontAwesomeIcon icon={faHome} className="text-gray-800" />
+            </div>
+          </li>
+          <li className="relative group">
+            <Link href="/about" className="text-lg">About</Link>
+            <div className="absolute bottom-[-1.5rem] left-1/2 transform -translate-x-1/2 w-8 h-8 bg-red-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
+              <FontAwesomeIcon icon={faUser} className="text-gray-800" />
+            </div>
+          </li>
+          <li className="relative group">
+            <Link href="/skills" className="text-lg">Skills</Link>
+            <div className="absolute bottom-[-1.5rem] left-1/2 transform -translate-x-1/2 w-8 h-8 bg-red-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
+              <FontAwesomeIcon icon={faTools} className="text-gray-800" />
+            </div>
+          </li>
+          <li className="relative group">
+            <Link href="/projects" className="text-lg">Projects</Link>
+            <div className="absolute bottom-[-1.5rem] left-1/2 transform -translate-x-1/2 w-8 h-8 bg-red-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
+              <FontAwesomeIcon icon={faProjectDiagram} className="text-gray-800" />
+            </div>
+          </li>
+          <li className="relative group">
+            <Link href="/contact" className="text-lg">Contact</Link>
+            <div className="absolute bottom-[-1.5rem] left-1/2 transform -translate-x-1/2 w-8 h-8 bg-red-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
+              <FontAwesomeIcon icon={faEnvelope} className="text-gray-800" />
+            </div>
+          </li>
+        </ul>
       </div>
+
+      {/* Mobile Navbar */}
+      <div className="lg:hidden flex justify-between items-center">
+        <h1 className="text-xl font-bold ml-4">SYEDA</h1>
+        <button onClick={toggleMenu} className="text-2xl mr-4">
+          <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
+        </button>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <ul className="lg:hidden bg-blue-400 text-black p-4 space-y-4">
+          <li className="flex items-center space-x-3">
+            <FontAwesomeIcon icon={faHome} />
+            <Link href="/" onClick={() => setIsOpen(false)} className="text-lg">Home</Link>
+          </li>
+          <li className="flex items-center space-x-3">
+            <FontAwesomeIcon icon={faUser} />
+            <Link href="/about" onClick={() => setIsOpen(false)} className="text-lg">About</Link>
+          </li>
+          <li className="flex items-center space-x-3">
+            <FontAwesomeIcon icon={faTools} />
+            <Link href="/skills" onClick={() => setIsOpen(false)} className="text-lg">Skills</Link>
+          </li>
+          <li className="flex items-center space-x-3">
+            <FontAwesomeIcon icon={faProjectDiagram} />
+            <Link href="/projects" onClick={() => setIsOpen(false)} className="text-lg">Projects</Link>
+          </li>
+          <li className="flex items-center space-x-3">
+            <FontAwesomeIcon icon={faEnvelope} />
+            <Link href="/contact" onClick={() => setIsOpen(false)} className="text-lg">Contact</Link>
+          </li>
+        </ul>
+      )}
+
+      {/* Divider */}
+      <div className="bg-white w-full h-1 mt-2 lg:mt-4"></div>
     </nav>
   );
 };
