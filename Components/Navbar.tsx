@@ -1,80 +1,92 @@
 "use client";
 
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHome,
-  faUser,
-  faProjectDiagram,
-  faEnvelope,
-  faBars,
-  faTimes,
-  faCode,
-} from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from "react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface NavLinkType {
+  title: string;
+  path: string;
+}
 
-  const navItems = [
-    { href: "/", label: "Home", icon: faHome },
-    { href: "/about", label: "About", icon: faUser },
-    { href: "/skills", label: "Skills", icon: faCode },
-    { href: "/projects", label: "Projects", icon: faProjectDiagram },
-    { href: "/contact", label: "Contact", icon: faEnvelope },
-  ];
+const navLinks: NavLinkType[] = [
+  {
+    title: "Home",
+    path: "#home", 
+  },
+  {
+    title: "About",
+    path: "#about",
+  },
+  {
+    title: "Projects",
+    path: "#projects",
+  },
+    {
+    title: "Skills",
+    path: "#skills",
+  },
+  {
+    title: "Contact",
+    path: "#contact", 
+  },
+];
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
+const Navbar: React.FC = () => {
+  const [navbarOpen, setNavbarOpen] = useState<boolean>(false);
 
   return (
-    <nav className="bg-black text-pink-300 fixed top-0 left-0 w-full z-50 shadow-md">
-      {/* Main Container */}
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        {/* Brand */}
-        <h1 className="text-lg font-bold">SYEDA</h1>
-
-        {/* Desktop Nav */}
-        <ul className="hidden lg:flex space-x-8 items-center">
-          {navItems.map(({ href, label, icon }) => (
-            <li key={label} className="relative group cursor-pointer">
-              <Link href={href} className="text-sm hover:text-white transition">
-                {label}
-              </Link>
-              <div className="absolute bottom-[-1.8rem] left-1/2 transform -translate-x-1/2 w-6 h-6 bg-red-300 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
-                <FontAwesomeIcon icon={icon} className="text-gray-800 text-xs" />
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        {/* Mobile Toggle Button */}
-        <button className="lg:hidden text-2xl text-pink-300" onClick={toggleMenu}>
-          <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
-        </button>
-      </div>
-
-      {/* Mobile Dropdown */}
-      {isOpen && (
-        <div className="lg:hidden bg-gray-800 text-pink-200 px-6 pb-4 pt-2">
-          <ul className="space-y-3 text-sm">
-            {navItems.map(({ href, label, icon }) => (
-              <li
-                key={label}
-                className="flex items-center space-x-3 hover:bg-gray-700 px-2 py-1 rounded transition"
-              >
-                <FontAwesomeIcon icon={icon} />
-                <Link href={href} onClick={closeMenu} className="hover:text-white">
-                  {label}
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#121212] w-full">
+      <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-4 py-2">
+        <Link
+          href="#portfolio" 
+          className="text-2xl md:text-5xl text-white font-semibold ml-[10px]"
+        >
+          Portfolio
+        </Link>
+        <div className="mobile-menu block md:hidden">
+          <button
+            onClick={() => setNavbarOpen(!navbarOpen)}
+            className="flex items-center px-3 py-2 border rounded-md border-slate-200 text-slate-200 hover:text-white hover:border-white transition-all duration-300"
+          >
+            {navbarOpen ? (
+              <XMarkIcon className="h-6 w-6" />
+            ) : (
+              <Bars3Icon className="h-6 w-6" />
+            )}
+          </button>
+        </div>
+        <div className="menu hidden md:block md:w-auto">
+          <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0">
+            {navLinks.map((link, index) => (
+              <li key={index}>
+                <Link
+                  href={link.path}
+                  className="text-xl font-medium text-white hover:text-purple-600 hover:underline transition-all duration-300"
+                >
+                  {link.title}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
-      )}
+        <div className={`mobile-menu-links ${navbarOpen ? "block" : "hidden"} md:hidden`}>
+          <ul className="flex flex-col p-4 space-y-4 mt-4 bg-[#121212]">
+            {navLinks.map((link, index) => (
+              <li key={index}>
+                <Link
+                  href={link.path}
+                  className="text-xl font-medium text-white hover:text-purple-600 hover:underline transition-all duration-300"
+                >
+                  {link.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </nav>
   );
 };
 
 export default Navbar;
-
