@@ -6,13 +6,9 @@ import Projects from "@/app/projects/page";
 import ContactForm from "@/app/contact/page";
 import TypingAnimation from "@/app/animation/page";
 
-
-
-export default function page() {
+export default function Page() {
   return (
-    <div>
-    
-
+    <>
       {/* Hero Section */}
       <section id="home" className="relative w-full bg-[#ADD8E6] h-4/5 max-lg:h-auto">
         <div className="flex justify-between items-center w-full p-9 max-lg:flex-col">
@@ -40,8 +36,6 @@ export default function page() {
       <section id="skills"><Skills /></section>
       <section id="projects"><Projects /></section>
       <section id="contact"><ContactForm /></section>
-
-     
-    </div>
+    </>
   );
 }
