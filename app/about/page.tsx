@@ -18,15 +18,6 @@ export default function About() {
             </li>
           </ul>
         </div>
-
-        <div className="relative py-8 text-center">
-          <Link
-            href="/#ContactUs"
-            className="text-color-01 text-lg border-2 rounded-3xl px-8 py-3 cursor-pointer hover:text-black hover:font-bold hover:bg-02"
-          >
-            Contact Me
-          </Link>
-        </div>
       </div>
     </section>
   );
