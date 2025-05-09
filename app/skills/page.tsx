@@ -39,23 +39,23 @@ export default function Skills() {
             <div>
               <Image
                 src="/images/icon3.png"
-                alt="JavaScript"
-                width={120}
-                height={120}
-                className="mx-auto rounded object-cover hover:scale-125 duration-300"
-              />
-              <p className="mt-4 text-lg font-semibold">JavaScript</p>
-            </div>
-
-            <div>
-              <Image
-                src="/images/icon6.png"
                 alt="Tailwind CSS"
                 width={120}
                 height={120}
                 className="mx-auto rounded object-cover hover:scale-125 duration-300"
               />
               <p className="mt-4 text-lg font-semibold">Tailwind CSS</p>
+            </div>
+
+            <div>
+              <Image
+                src="/images/icon6.png"
+                alt="Typescript"
+                width={120}
+                height={120}
+                className="mx-auto rounded object-cover hover:scale-125 duration-300"
+              />
+              <p className="mt-4 text-lg font-semibold">Typescript</p>
             </div>
 
             <div>
