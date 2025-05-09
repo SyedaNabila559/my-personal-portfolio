@@ -29,12 +29,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-black text-pink-300 fixed top-0 left-0 w-full z-50 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      {/* Main Container */}
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Brand */}
         <h1 className="text-lg font-bold">SYEDA</h1>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex space-x-6 items-center">
+        <ul className="hidden lg:flex space-x-8 items-center">
           {navItems.map(({ href, label, icon }) => (
             <li key={label} className="relative group cursor-pointer">
               <Link href={href} className="text-sm hover:text-white transition">
@@ -47,18 +48,18 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Mobile Menu Toggle */}
-        <button className="lg:hidden text-xl text-pink-300" onClick={toggleMenu}>
+        {/* Mobile Toggle Button */}
+        <button className="lg:hidden text-2xl text-pink-300" onClick={toggleMenu}>
           <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
         </button>
       </div>
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-blue-400 text-black px-4 pb-4 pt-2">
-          <ul className="space-y-3 text-sm">
+        <div className="lg:hidden bg-blue-400 text-black px-6 pb-4 pt-2">
+          <ul className="space-y-4 text-sm">
             {navItems.map(({ href, label, icon }) => (
-              <li key={label} className="flex items-center space-x-2">
+              <li key={label} className="flex items-center space-x-3">
                 <FontAwesomeIcon icon={icon} />
                 <Link href={href} onClick={closeMenu}>
                   {label}
