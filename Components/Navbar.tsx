@@ -34,7 +34,7 @@ const Navbar = () => {
         {/* Brand */}
         <h1 className="text-lg font-bold">SYEDA</h1>
 
-        {/* Desktop Menu */}
+        {/* Desktop Nav */}
         <ul className="hidden lg:flex space-x-8 items-center">
           {navItems.map(({ href, label, icon }) => (
             <li key={label} className="relative group cursor-pointer">
@@ -56,12 +56,15 @@ const Navbar = () => {
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-blue-400 text-black px-6 pb-4 pt-2">
-          <ul className="space-y-4 text-sm">
+        <div className="lg:hidden bg-gray-800 text-pink-200 px-6 pb-4 pt-2">
+          <ul className="space-y-3 text-sm">
             {navItems.map(({ href, label, icon }) => (
-              <li key={label} className="flex items-center space-x-3">
+              <li
+                key={label}
+                className="flex items-center space-x-3 hover:bg-gray-700 px-2 py-1 rounded transition"
+              >
                 <FontAwesomeIcon icon={icon} />
-                <Link href={href} onClick={closeMenu}>
+                <Link href={href} onClick={closeMenu} className="hover:text-white">
                   {label}
                 </Link>
               </li>
@@ -74,3 +77,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
