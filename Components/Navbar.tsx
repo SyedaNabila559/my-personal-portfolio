@@ -16,9 +16,6 @@ import Link from "next/link";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
-
   const navItems = [
     { href: "/", label: "Home", icon: faHome },
     { href: "/about", label: "About", icon: faUser },
@@ -27,6 +24,9 @@ const Navbar = () => {
     { href: "/contact", label: "Contact", icon: faEnvelope },
   ];
 
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+
   return (
     <nav className="bg-black text-pink-300 fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -34,35 +34,39 @@ const Navbar = () => {
         <h1 className="text-lg font-bold">SYEDA</h1>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex space-x-6">
+        <ul className="hidden lg:flex space-x-6 items-center">
           {navItems.map(({ href, label, icon }) => (
-            <li key={label} className="relative group">
+            <li key={label} className="relative group cursor-pointer">
               <Link href={href} className="text-sm hover:text-white transition">
                 {label}
               </Link>
-              <div className="absolute bottom-[-1.5rem] left-1/2 transform -translate-x-1/2 w-6 h-6 bg-red-300 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
+              <div className="absolute bottom-[-1.8rem] left-1/2 transform -translate-x-1/2 w-6 h-6 bg-red-300 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
                 <FontAwesomeIcon icon={icon} className="text-gray-800 text-xs" />
               </div>
             </li>
           ))}
         </ul>
 
-        {/* Mobile Toggle Button */}
+        {/* Mobile Menu Toggle */}
         <button className="lg:hidden text-xl text-pink-300" onClick={toggleMenu}>
           <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Dropdown */}
       {isOpen && (
-        <ul className="lg:hidden bg-blue-400 text-black px-4 pb-4 space-y-3 text-sm">
-          {navItems.map(({ href, label, icon }) => (
-            <li key={label} className="flex items-center space-x-2">
-              <FontAwesomeIcon icon={icon} />
-              <Link href={href} onClick={closeMenu}>{label}</Link>
-            </li>
-          ))}
-        </ul>
+        <div className="lg:hidden bg-blue-400 text-black px-4 pb-4 pt-2">
+          <ul className="space-y-3 text-sm">
+            {navItems.map(({ href, label, icon }) => (
+              <li key={label} className="flex items-center space-x-2">
+                <FontAwesomeIcon icon={icon} />
+                <Link href={href} onClick={closeMenu}>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </nav>
   );
