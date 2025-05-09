@@ -40,7 +40,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-black text-pink-300 px-3 py-2 sm:px-4 sm:py-3 lg:px-6 lg:py-4 fixed top-0 left-0 w-full z-50">
+    <nav className="bg-black text-pink-300 px-6 py-4 sm:px-8 sm:py-5 lg:px-10 lg:py-6 fixed top-0 left-0 w-full z-50">
       {isMobile ? (
         // Mobile Navbar
         <>
@@ -52,7 +52,7 @@ const Navbar = () => {
           </div>
 
           {isOpen && (
-            <ul className="bg-blue-400 text-black p-4 space-y-4">
+            <ul className="bg-blue-400 text-black p-4 space-y-4 mt-2 rounded-md">
               {menuItems.map((item) => (
                 <li key={item.label} className="flex items-center space-x-3">
                   <FontAwesomeIcon icon={item.icon} />
@@ -67,7 +67,7 @@ const Navbar = () => {
       ) : (
         // Desktop Navbar
         <div className="flex justify-between items-center">
-          <h1 className="text-xl lg:text-2xl font-bold ml-4">SYEDA</h1>
+          <h1 className="text-2xl font-bold ml-4">SYEDA</h1>
           <ul className="flex space-x-8 mr-8 mt-2">
             {menuItems.map((item) => (
               <li key={item.label} className="relative group">
@@ -81,10 +81,9 @@ const Navbar = () => {
         </div>
       )}
 
-      <div className="bg-white w-full h-1 mt-2 lg:mt-4"></div>
+      <div className="bg-white w-full h-1 mt-3 rounded-full"></div>
     </nav>
   );
 };
 
 export default Navbar;
-
